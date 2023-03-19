@@ -55,15 +55,38 @@ select * from people where mod(id,2)=0 ;
 select count(*) from people 
 select count(id) from people
 
---6) Isciler tablosunda en yuksek maasi alan kisinin tum bilgilerini gosteren query yazin
+--6) people tablosunda en yuksek maasi alan kisinin tum bilgilerini gosteren query yazin
+select * from people order by maas desc 
+fetch next 1 row only;
 
+--7) Personel tablosunda en dusuk maasi alan kisinin tum bilgilerini gosteren query yazin
+select * from people order by maas
+fetch next 1 row only;
 
+--8) Isciler tablosunda ikinci en yuksek maasi maasi gosteren query yazin
+select * from workers order by maas desc
+offset 1 row
+fetch next 1 row only;
 
+select max(maas) from workers
+where maas <>(select max(maas) from workers);
 
+-9) workers tablosunda ikinci en dusuk maasi alan iscinin tum bilgilerini gosteren query yazin
+select * from workers order by maas
+offset 1 row
+fetch next 1 row only;
 
+select min(maas) from workers
+where maas <>(select min(maas) from workers);
 
+--10) workers tablosunda en yuksek maasi alan iscinin disindaki tum iscilerin, tum bilgilerini
+--gosteren query yazin
+select * from workers order by maas desc
+offset 1 row
+fetch next 6 rows only
 
-
+select * from workers 
+where maas <>(select max(maas) from workers) order by maas desc ;
 
 
 
